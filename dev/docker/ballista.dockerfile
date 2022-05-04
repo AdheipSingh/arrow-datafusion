@@ -33,13 +33,15 @@ COPY ballista ./ballista/
 COPY ballista-examples ./ballista-examples/
 COPY benchmarks ./benchmarks/
 COPY datafusion ./datafusion/
+COPY datafusion/core ./datafusion/core/
 COPY datafusion-cli ./datafusion-cli/
-COPY datafusion-common ./datafusion-common/
-COPY datafusion-expr ./datafusion-expr/
-COPY datafusion-physical-expr ./datafusion-physical-expr/
-COPY datafusion-jit ./datafusion-jit/
-COPY datafusion-proto ./datafusion-proto/
+COPY datafusion/common ./datafusion/common/
+COPY datafusion/expr ./datafusion/expr/
+COPY datafusion/physical-expr ./datafusion/physical-expr/
+COPY datafusion/jit ./datafusion/jit/
+COPY datafusion/proto ./datafusion/proto/
 COPY datafusion-examples ./datafusion-examples/
+COPY data-access data-access
 RUN cargo chef prepare --recipe-path recipe.json
 
 FROM base as cacher
@@ -64,12 +66,13 @@ COPY ballista-examples ./ballista-examples/
 COPY benchmarks ./benchmarks/
 COPY datafusion ./datafusion/
 COPY datafusion-cli ./datafusion-cli/
-COPY datafusion-common ./datafusion-common/
-COPY datafusion-expr ./datafusion-expr/
-COPY datafusion-physical-expr ./datafusion-physical-expr/
-COPY datafusion-jit ./datafusion-jit/
-COPY datafusion-proto ./datafusion-proto/
+COPY datafusion/common ./datafusion/common/
+COPY datafusion/expr ./datafusion/expr/
+COPY datafusion/physical-expr ./datafusion/physical-expr/
+COPY datafusion/jit ./datafusion/jit/
+COPY datafusion/proto ./datafusion/proto/
 COPY datafusion-examples ./datafusion-examples/
+COPY data-access data-access
 COPY --from=cacher /tmp/ballista/target target
 ARG RELEASE_FLAG=--release
 
